@@ -1,0 +1,16 @@
+{
+  "name": "co.giammar.useful-extensions",
+  "version": "1.0.0",
+  "displayName": "Useful Extensions",
+  "description": "TODO",
+  "unity": "2019.1",
+  "dependencies": {
+  },
+  "keywords": [
+  ],
+  "author": {
+    "name": "Kyle Giammarco",
+    "email": "kyle@giammar.co",
+    "url": "https://kyle.giammar.co"
+  }
+}
