@@ -1,3 +1,8 @@
+#if UNITASK
+using System.Threading;
+using Cysharp.Threading.Tasks;
+#endif
+using UnityEngine;
 using UnityEngine.Audio;
 
 namespace UsefulExtensions.Audio
@@ -10,7 +15,6 @@ namespace UsefulExtensions.Audio
             mixer.SetFloat(volumeName, db);
         }
 
-
         public static float GetVolume(this AudioMixer mixer, string volumeName = "volume")
         {
             if (mixer.GetFloat(volumeName, out var decibels))
@@ -20,5 +24,25 @@ namespace UsefulExtensions.Audio
 
             return 0;
         }
+    }
+
+    public static class AudioSourceExtensions
+    {
+#if UNITASK
+        public static async UniTask Play(this AudioSource source, CancellationToken ctx = default)
+        {
+            source.Play();
+            // Wait until the source is no longer playing
+            await UniTask.WaitUntil(() => !source.isPlaying, cancellationToken: ctx);
+        }
+
+        public static async UniTask PlayOneShot(this AudioSource source, AudioClip clip,
+            CancellationToken ctx = default)
+        {
+            source.PlayOneShot(clip);
+            // Wait until the source is no longer playing
+            await UniTask.WaitUntil(() => !source.isPlaying, cancellationToken: ctx);
+        }
+#endif
     }
 }

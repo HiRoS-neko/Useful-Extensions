@@ -27,7 +27,7 @@ namespace UsefulExtensions.Components
         /// </summary>
         /// <param name="obj">The object to be destroyed.</param>
         /// <typeparam name="T">The type of the object to be destroyed, which must inherit from UnityEngine.Object.</typeparam>
-        public static void Destroy<T>(T obj) where T : Object
+        public static void Destroy<T>(this T obj) where T : Object
         {
             if (Application.isPlaying)
             {
